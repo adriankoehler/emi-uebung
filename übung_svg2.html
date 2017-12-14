@@ -8,7 +8,14 @@
 
 <script>
 
-var ecken = 5;
+//polygon als svg pfad in datei oder konsole
+//+polygone dem Schneemann hinzufügen, animieren(drehen kosntant)
+
+var ecken[]= [5,8,10,14,18,27];
+for (var i = 0; i < ecken.length; i++) {
+  genPolygon(ecken[i])
+}
+
 function genPolygon() {
 
 //   <svg height="210" width="500">
