@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg height="1000" width="1000" xmlns="http://www.w3.org/2000/svg"
+  xmlns:x="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full">
+  <title>Schneemann</title>
+  <desc>hoehoehoe</desc>>
+
+	<defs>
+    <linearGradient id="grad1" x1="50%" y1="0%" x2="50%" y2="100%" >
+    <stop offset="0%" style="stop-color:rgb(219,255,251);stop-opacity:1" />
+    <stop offset="100%" style="stop-color:rgb(131,212,209);stop-opacity:1" />
+    </linearGradient>
+    <circle r="40" id="kugel" />
+
+  </defs>
+
+  <use x="110" y="155" transform="scale(2.1)" href="#kugel" fill="url(#grad1)"/>
+  <use x="142" y="125" transform="scale(1.6)" href="#kugel" fill="url(#grad1)"/>
+	<use x="205" y="95" transform="scale(1.1)" href="#kugel" fill="url(#grad1)"/>
+
+	<use x="245" y="285" transform="scale(0.6)" href="#kugel" fill="url(#grad1)"/>
+	<use x="507" y="275" transform="scale(0.6)" href="#kugel" fill="url(#grad1)"/> <!--ARME-->
+
+  <use x="260" y="660" transform="scale(0.6)" href="#kugel" fill="url(#grad1)">
+  <animateTransform attributeName="transform" id="move"
+                        attributeType="XML"
+                        type="translate"
+                        additive="sum"
+                        values="0; 30; 0"
+                        keyTimes="0 ; 0.5 ; 1"
+                        dur="2s"
+                        begin="zwinkern.begin+1s"
+                        repeatCount="indefinite"/>
+  </use>
+  <use x="510" y="660" transform="scale(0.6)" href="#kugel" fill="url(#grad1)"/> <!--FÜSSE-->
+
+  <circle r="5" cx="0" cy="0" transform="translate(215 94)">
+    <animateTransform attributeName="transform" id="zwinkern"
+                          attributeType="XML"
+                          type="scale"
+                          additive="sum"
+                          values="1 1; 1 1; 1.5 0.7 ; 1 1 "
+                          keyTimes="0 ; 0.7 ; 0.8 ; 1"
+                          dur="1s"
+                          repeatCount="indefinite"/>
+  </circle>
+  <circle r="5" cx="245" cy="93"/> <!--AUGEN-->
+
+  <path d="M228 117 L280 112 L228 100 Z" fill="orange"/>  <!--NASE-->
+  <path d="M220,125 C230,140 240,130 245,125" fill="none" stroke="black" stroke-width="5px"/> <!--MUND-->
+</svg>
