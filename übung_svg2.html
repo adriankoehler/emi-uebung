@@ -11,18 +11,26 @@
 //polygon als svg pfad in datei oder konsole
 //+polygone dem Schneemann hinzufügen, animieren(drehen kosntant)
 
-var ecken[]= [5,8,10,14,18,27];
+var ecken = [5,8,10,14,18,27];
 for (var i = 0; i < ecken.length; i++) {
   genPolygon(ecken[i])
 }
 
-function genPolygon() {
+function genPolygon(ecken) {
+var polygonSides = 200 / ecken;
+var polygonAngles = 360 / ecken;
+var polygon;
+polygon = "<polygon points=""";
+for (var i = 0; i < ecken; i++) {
+  polygon+=polygonSides+",0 "+
+}
 
 //   <svg height="210" width="500">
 //   <polygon points="200,10 250,190 160,210" style="fill:lime;stroke:purple;stroke-width:1" />
 //   </svg>
-}
+console.log(ecken);
 document.getElementById("demo").innerHTML = ecken;
+}
 </script>
 
 </body>
