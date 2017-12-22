@@ -15,12 +15,11 @@
   <script>
   <![CDATA[
 
-  //+polygone dem Schneemann hinzufügen, animieren(drehen kosntant)
   // x = r * sin(phi),
   // y = r * cos(phi)
 
   var centerX = 250;
-  var centerY = 250; //50 für svg1
+  var centerY = 250; //0 für svg1
 
   //funktion für alle eckenzahlen in array ecken ausführen
   // var ecken = [5,8,10,14,18,27];
@@ -45,9 +44,8 @@
       polygonY.push(centerY+polygonSides*Math.cos(polygonAngles[i]/180*Math.PI));
     }
 
-    var polygon;
+    var polygon = "<polygon points=";
     var polygonINT = "";
-    polygon = "<polygon points=";
     for (var i = 0; i < ecken; i++) {
       polygon+=polygonX[i]+","+polygonY[i]+" ";
       polygonINT+=polygonX[i]+","+polygonY[i]+" ";

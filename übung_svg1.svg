@@ -11,16 +11,38 @@
     <stop offset="100%" style="stop-color:rgb(131,212,209);stop-opacity:1" />
     </linearGradient>
     <circle r="40" id="kugel" />
-    <polygon points="50,75 73.77641290737884,57.72542485937369 64.69463130731182,29.774575140626318 35.30536869268818,29.774575140626315 26.22358709262116,57.72542485937368" id="polygon5" />
-    <polygon points="50,75 67.67766952966369,67.67766952966369 75,50 67.67766952966369,32.32233047033631 50,25 32.32233047033631,32.32233047033631 25,49.99999999999999 32.32233047033631,67.67766952966369" id="polygon8" />
+    <polygon points="0,25 23.776412907378838,7.725424859373686 14.69463130731183,-20.225424859373682 -14.694631307311825,-20.225424859373685 -23.77641290737884,7.725424859373681" id="polygon5">
+      <animateTransform
+        attributeType="XML"
+        additive="sum"
+        attributeName="transform"
+        type="rotate"
+        from="0"
+        to="360"
+        dur="4s"
+        repeatCount="indefinite"
+      />
+    </polygon>
+    <polygon points="0,25 17.677669529663685,17.67766952966369 25,1.5308084989341915e-15 17.67766952966369,-17.677669529663685 3.061616997868383e-15,-25 -17.677669529663685,-17.677669529663692 -25,-4.592425496802574e-15 -17.677669529663692,17.677669529663685" id="polygon8">
+      <animateTransform
+        attributeType="XML"
+        additive="sum"
+        attributeName="transform"
+        type="rotate"
+        from="360"
+        to="0"
+        dur="4s"
+        repeatCount="indefinite"
+      />
+    </polygon>
 <!-- +beliebige weitere polygone aus 2) -->
   </defs>
 
-  <use x="420" y="25" href="#polygon5" fill="darkblue"/>
-  <use x="10" y="15" href="#polygon5" fill="darkblue"/>
-  <use x="250" y="35" href="#polygon5" fill="darkblue"/>
-  <use x="140" y="25" href="#polygon8" fill="darkblue"/>
-  <use x="330" y="10" href="#polygon8" fill="darkblue"/>
+  <use x="450" y="65" href="#polygon5" fill="darkblue"/>
+  <use x="50" y="45" href="#polygon5" fill="darkblue"/>
+  <use x="360" y="55" href="#polygon5" fill="darkblue"/>
+  <use x="170" y="45" href="#polygon8" fill="darkblue"/>
+  <use x="270" y="60" href="#polygon8" fill="darkblue"/>
 
   <use x="110" y="155" transform="scale(2.1)" href="#kugel" fill="url(#grad1)"/>
   <use x="142" y="125" transform="scale(1.6)" href="#kugel" fill="url(#grad1)"/>
