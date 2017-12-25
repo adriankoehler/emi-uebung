@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
-<body>
+<body style="font-family: sans-serif">
 
-<h2 style="font-family: sans-serif">Polygon Gen</h2>
+<h2>Polygon Gen</h2>
+<p>(output in console)</p>
 
 <svg height="500" width="500" xmlns="http://www.w3.org/2000/svg"
   xmlns:x="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full">
-  <polygon id="five" style="fill:none;stroke:#020202;stroke-width:1" />
-  <polygon id="eight" style="fill:none;stroke:#030303;stroke-width:1" />
-  <polygon id="ten" style="fill:none;stroke:#040404;stroke-width:1" />
-  <polygon id="fourteen" style="fill:none;stroke:#050505;stroke-width:1" />
-  <polygon id="eightteen" style="fill:none;stroke:#060606;stroke-width:1" />
-  <polygon id="twentyseven" style="fill:none;stroke:#070707;stroke-width:1" />
+
+  <polygon id="twentyseven" style="fill:#FE4365;stroke:#070707;stroke-width:0" />
+  <polygon id="eightteen" style="fill:#FC9D9A;stroke:#060606;stroke-width:0" />
+  <polygon id="fourteen" style="fill:#F9CDAD;stroke:#050505;stroke-width:0" />
+  <polygon id="ten" style="fill:#C8CBA9;stroke:#040404;stroke-width:0" />
+  <polygon id="eight" style="fill:#83AF9B;stroke:#030303;stroke-width:0" />
+  <polygon id="five" style="fill:#4E9A77;stroke:#020202;stroke-width:0" />
+
   <script>
   <![CDATA[
 
@@ -21,48 +24,93 @@
   var centerX = 250;
   var centerY = 250; //0 für svg1
 
-  //funktion für alle eckenzahlen in array ecken ausführen
+  //funktionen für alle eckenzahlen in array ecken ausführen
+
   // var ecken = [5,8,10,14,18,27];
+  // for (var i = 0; i < ecken.length; i++) {
+  //   genStar(ecken[i])
+  // }
   // for (var i = 0; i < ecken.length; i++) {
   //   genPolygon(ecken[i])
   // }
 
   //länge kanten+winkel festlegen; winkel in Array speichern
-  function genPolygon(ecken) {
-    var polygonX = [];
-    var polygonY = [];
-    var polygonSides = 120; //25 für svg1
-    var degrees = 360 / ecken;
-    var polygonAngles = [];
-    for (var i = 0; i < ecken; i++) {
-      polygonAngles.push(i*degrees);
+    function genPolygon(ecken) {
+      var polygonX = [];
+      var polygonY = [];
+      var polygonSides = 120; //25 für svg1
+      var degrees = 360 / ecken;
+      var polygonAngles = [];
+      for (var i = 0; i < ecken; i++) {
+        polygonAngles.push(i*degrees);
+      }
+
+      //einzelne koordinaten berechnen
+      for (var i = 0; i < ecken; i++) {
+        polygonX.push(centerX+polygonSides*Math.sin(polygonAngles[i]/180*Math.PI));
+        polygonY.push(centerY+polygonSides*Math.cos(polygonAngles[i]/180*Math.PI));
+      }
+
+      var polygon = "";
+      for (var i = 0; i < ecken; i++) {
+        polygon+=polygonX[i]+","+polygonY[i]+" ";
+      }
+
+      console.log("------" + ecken + "------");
+      console.log("<polygon points=" + polygon + "/>");
+      return polygon;
     }
 
-    //einzelne koordinaten berechnen
-    for (var i = 0; i < ecken; i++) {
-      polygonX.push(centerX+polygonSides*Math.sin(polygonAngles[i]/180*Math.PI));
-      polygonY.push(centerY+polygonSides*Math.cos(polygonAngles[i]/180*Math.PI));
+    function genStar(ecken) {
+      var starX = [];
+      var starY = [];
+      var starSides = 120; //25 für svg1
+      var degrees = 360 / ecken;
+      var starAngles = [];
+      for (var i = 0; i < ecken; i++) {
+        starAngles.push(i*degrees);
+      }
+      //einzelne koordinaten berechnen
+      for (var i = 0; i < ecken; i++) {
+        starX.push(centerX+starSides*Math.sin(starAngles[i]/180*Math.PI));
+        starY.push(centerY+starSides*Math.cos(starAngles[i]/180*Math.PI));
+      }
+
+      // wenn ungerade eckenzahl -> gesamter stern wird gezeichet; falls gerade->nur die "hälfte" des sterns (bsp 8eckiger -> nur viereck wird gezeichet)
+      var n=0;
+      var star = "";
+      for (var i = 0; i < ecken; i++) {
+        n = (n + 2) % ecken;
+        if (n==0){n=ecken;}
+        // console.log(i+"->" + n);
+        star+=starX[n-1]+","+starY[n-1]+" ";
+      }
+
+      //wenn gerade eckenzahl: "weiteres polygon" anfügen, aber um eine ecke versetzt -> gesamter stern gezeichnet
+      n=1;
+      if (ecken % 2==0) {
+        for (var i = 0; i < ecken/2; i++) {
+          n = (n + 2) % ecken;
+          if (n==0){n=ecken;}
+          // console.log(i+"->" + n);
+          star+=starX[n-1]+","+starY[n-1]+" ";
+        }
+        star+=starX[2]+","+starY[2]+" ";
+        star+=starX[ecken/2]+","+starY[ecken/2]+" ";
+        //letzte ecke anpassen, sodass der kreis ordentlich und geschlossen gefüllt wird
+      }
+
+      console.log("------" + ecken + "------");
+      console.log("<polygon points=" + star + "/>");
+      return star;
     }
 
-    var polygon = "<polygon points=";
-    var polygonINT = "";
-    for (var i = 0; i < ecken; i++) {
-      polygon+=polygonX[i]+","+polygonY[i]+" ";
-      polygonINT+=polygonX[i]+","+polygonY[i]+" ";
-    }
-    polygon += "/>";
-
-    console.log("------" + ecken + "------");
-    console.log(polygon);
-    return polygonINT;
-  }
-
-  document.getElementById("five").setAttribute("points", genPolygon(5));
-  document.getElementById("eight").setAttribute("points", genPolygon(8));
-  document.getElementById("ten").setAttribute("points", genPolygon(10));
-  document.getElementById("fourteen").setAttribute("points", genPolygon(14));
-  document.getElementById("eightteen").setAttribute("points", genPolygon(18));
-  document.getElementById("twentyseven").setAttribute("points", genPolygon(27));
+  document.getElementById("five").setAttribute("points", genStar(5));
+  document.getElementById("eight").setAttribute("points", genStar(8));
+  document.getElementById("ten").setAttribute("points", genStar(10));
+  document.getElementById("fourteen").setAttribute("points", genStar(14));
+  document.getElementById("eightteen").setAttribute("points", genStar(18));
+  document.getElementById("twentyseven").setAttribute("points", genStar(27));
 
   // document.getElementById("p5").innerHTML=genPolygon(5);
 ]]>
