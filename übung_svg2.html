@@ -76,29 +76,28 @@
         starY.push(centerY+starSides*Math.cos(starAngles[i]/180*Math.PI));
       }
 
-      // wenn ungerade eckenzahl -> gesamter stern wird gezeichet; falls gerade->nur die "hälfte" des sterns (bsp 8eckiger -> nur viereck wird gezeichet)
       var n=0;
       var star = "";
-      for (var i = 0; i < ecken; i++) {
-        n = (n + 2) % ecken;
-        if (n==0){n=ecken;}
-        // console.log(i+"->" + n);
-        star+=starX[n-1]+","+starY[n-1]+" ";
-      }
-
-      //wenn gerade eckenzahl: "weiteres polygon" anfügen, aber um eine ecke versetzt -> gesamter stern gezeichnet
-      n=1;
-      if (ecken % 2==0) {
-        for (var i = 0; i < ecken/2; i++) {
+      // gerade eckenanzahl -> jeweils einen knoten überspringen
+      if (ecken % 2==1) {
+        for (var i = 0; i < ecken; i++) {
           n = (n + 2) % ecken;
           if (n==0){n=ecken;}
           // console.log(i+"->" + n);
           star+=starX[n-1]+","+starY[n-1]+" ";
         }
-        star+=starX[2]+","+starY[2]+" ";
-        star+=starX[ecken/2]+","+starY[ecken/2]+" ";
-        //letzte ecke anpassen, sodass der kreis ordentlich und geschlossen gefüllt wird
       }
+      // ungerade eckenanzahl -> jeweils zwei knoten überspringen
+      if (ecken % 2==0) {
+        for (var i = 0; i < ecken; i++) {
+          n = (n + 3) % ecken;
+          if (n==0){n=ecken;}
+          // console.log(i+"->" + n);
+          star+=starX[n-1]+","+starY[n-1]+" ";
+        }
+      }
+
+
 
       console.log("------" + ecken + "------");
       console.log("<polygon points=" + star + "/>");
